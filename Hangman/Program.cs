@@ -6,14 +6,17 @@ namespace Hangman
     {
         // Word List
         //const List<string> WORDSLIST = new List<string>() { "Geordie", "Florian", "Michael", "Henrik" };
+
+        //   _____
+        //   |   |
+        //   |   O
+        //   |  _|_
+        //   |   |
+        //   |  / \
+        //__/|\__
         const int MAX_GUESSES = 12;
         static void Main(string[] args)
         {
-            // Header section
-            Console.WriteLine("\t\t\tWELCOME");
-            Console.WriteLine("\t\tHangman Word Guessing Game");
-            Console.WriteLine("==========================================================\n");
-
             // Word List
             List<string> wordsList = new List<string>() { "Geordie", "Florian", "Michael", "Henrik" };
 
@@ -28,7 +31,14 @@ namespace Hangman
             {
                 outputChars[i] = '_';
             }
-            
+
+            // Header section
+            Console.WriteLine("\t\t\tWELCOME");
+            Console.WriteLine("\t\tHangman Word Guessing Game");
+            Console.WriteLine("==========================================================\n");
+            Console.WriteLine($"\t\t{String.Join(' ', outputChars)}");
+
+
             //Game Loop
             int wrongGuesses = 0;
             int totalCorrectGuesses = 0;
@@ -58,18 +68,18 @@ namespace Hangman
                     wrongGuesses++;
                 }
 
-                // Output results
+                // Output resultS
                 Console.WriteLine($"\n\tYou guessed: {guessedLetter} ... {correctLetters} in the word.");
 
                 Thread.Sleep(3000);
 
                 Console.Clear();
-                Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine("\t\t\tWELCOME");
                 Console.WriteLine("\t\tHangman Word Guessing Game");
                 Console.WriteLine("==========================================================\n");
                 Console.WriteLine($"\t\t{String.Join(' ', outputChars)}");
                 
+                // Exit if word is found
                 if (totalCorrectGuesses == targetWord.Length)
                 {
                     Console.WriteLine($"\n\t\tYou guess correctly ... Well done!!\n");
@@ -78,6 +88,7 @@ namespace Hangman
 
             } while (wrongGuesses < MAX_GUESSES);
 
+            // Output if word not found
             Console.Clear();
             Console.WriteLine("\t\t\tWELCOME");
             Console.WriteLine("\t\tHangman Word Guessing Game");
