@@ -83,7 +83,7 @@ namespace Hangman
                 if (totalCorrectGuesses == targetWord.Length)
                 {
                     Console.WriteLine($"\n\t\tYou guess correctly ... Well done!!\n");
-                    System.Environment.Exit(0);
+                    return;
                 }
 
             } while (wrongGuesses < MAX_GUESSES);
