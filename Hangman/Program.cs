@@ -15,8 +15,9 @@ namespace Hangman
         //   |   |
         //   |  / \
         //__/|\__
-        const int MAX_GUESSES = 3;
-        const string DIVIDER = "";
+        const int MAX_GUESSES = 12;
+        const string DIVIDER = "================================================================";
+        const string BLANKER = "                                                                ";
         static void Main(string[] args)
         {
             // Word List
@@ -50,7 +51,7 @@ namespace Hangman
                     Console.WriteLine("\t\t\tWELCOME");
                     Console.WriteLine("\t\tHangman Word Guessing Game");
                     Console.WriteLine($"\t\tGuess in word in {MAX_GUESSES} guesses.");
-                    Console.WriteLine("===============================================================\n");
+                    Console.WriteLine($"{DIVIDER}\n");
                     Console.WriteLine($"\t\t{String.Join(' ', outputChars)}");
                     Console.WriteLine($"\n\tIncorrectly Guessed Letters: {String.Join(' ', incorrectlyGuessedLetters)} ... {MAX_GUESSES - wrongGuesses} left!");
 
@@ -58,7 +59,10 @@ namespace Hangman
                     char guessedLetter = ' ';
                     do
                     {
-                        Console.Write($"\n\tPlease enter a letter (A to Z): ");
+                        Console.SetCursorPosition(0, 8);
+                        Console.Write($"{BLANKER}");
+                        Console.SetCursorPosition(0, 8);
+                        Console.Write($"\tPlease enter a letter (A to Z): ");
                         ConsoleKeyInfo guessedLetterInput = Console.ReadKey();
 
                         if ((int)guessedLetterInput.Key >= 65 && (int)guessedLetterInput.Key <= 90) // Is letter
@@ -69,6 +73,15 @@ namespace Hangman
                                 guessedLetter = ' ';
                             }
                         }
+
+                        if (guessedLetter == ' ')
+                        {
+                            Console.Write($"\n\tNot a letter or you already tried that ... try again!!");
+                            Thread.Sleep(750);
+                            Console.SetCursorPosition(0, 9);
+                            Console.Write($"{BLANKER}");
+                        }
+
                     } while (guessedLetter == ' ');
 
                     // Check guessedLetter agaisnt Word
@@ -111,35 +124,47 @@ namespace Hangman
                     Console.SetCursorPosition(16, 5);
                     Console.Write($"{String.Join(' ', outputChars)}");
 
-                    Console.SetCursorPosition(8, 15);
+                    Console.SetCursorPosition(8, 14);
                     Console.WriteLine($"YOU GUESSED '{String.Join(' ', targetWord.ToCharArray())}' CORRECTLY ... WELL DONE!!\n");
                 }
                 else
                 {
                     // Output if word not found and MAX_GUESSES reached
-                    Console.SetCursorPosition(8, 15);
+                    Console.SetCursorPosition(8, 14);
                     Console.WriteLine($"THE WORD WAS '{String.Join(' ', targetWord.ToCharArray())}' ... BETTER LUCK NEXT TIME!!\n");
                 }
 
-                Console.WriteLine("===============================================================\n");
+                Console.WriteLine($"{DIVIDER}\n");
 
                 // Play again question and validation
                 playAgainAnswer = ' ';
                 do
                 {
-                    Console.Write($"\n\tWould you like to play again? (Y/N): ");
+                    Console.SetCursorPosition(0, 18);
+                    Console.Write($"{BLANKER}");
+                    Console.SetCursorPosition(0, 18);
+                    Console.Write($"\tWould you like to play again? (Y/N): ");
                     ConsoleKeyInfo playAgainInput = Console.ReadKey();
 
                     if ( (int)playAgainInput.Key == 78 || (int)playAgainInput.Key == 89) // N or Y
                     {
                         playAgainAnswer = char.Parse(playAgainInput.Key.ToString());
                     }
+
+                    if (playAgainAnswer == ' ')
+                    {
+                        Console.Write($"\n\tPlease enter Y or N ... try again!!");
+                        Thread.Sleep(750);
+                        Console.SetCursorPosition(0, 19);
+                        Console.Write($"{BLANKER}");
+                    }
                 } while (playAgainAnswer == ' ');
+
             } while (playAgainAnswer == 'Y');
 
             // Final closing output
             Console.WriteLine($"\n\n\tThanks for playing, see you real soon!!");
-            Console.WriteLine("===============================================================\n");
+            Console.WriteLine($"{DIVIDER}\n");
         }
     }
 }
