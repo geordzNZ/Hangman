@@ -7,7 +7,7 @@ namespace Hangman
     {
         // Word List
         //const List<string> WORDSLIST = new List<string>() { "Geordie", "Florian", "Michael", "Henrik" };
-
+        //
         //   _____
         //   |   |
         //   |   O
@@ -18,6 +18,7 @@ namespace Hangman
         const int MAX_GUESSES = 12;
         const string DIVIDER = "================================================================";
         const string BLANKER = "                                                                ";
+        const int PAUSER = 750;
         static void Main(string[] args)
         {
             // Word List
@@ -25,7 +26,6 @@ namespace Hangman
 
             // Session Game Loop
             char playAgainAnswer = ' ';
-
             do
             {
                 // Set up game
@@ -77,7 +77,7 @@ namespace Hangman
                         if (guessedLetter == ' ')
                         {
                             Console.Write($"\n\tNot a letter or you already tried that ... try again!!");
-                            Thread.Sleep(750);
+                            Thread.Sleep(PAUSER);
                             Console.SetCursorPosition(0, 9);
                             Console.Write($"{BLANKER}");
                         }
@@ -108,7 +108,7 @@ namespace Hangman
 
                     // Output result and pause for reading
                     Console.WriteLine($"\n\n\tYou guessed: {guessedLetter} ... {correctLetters} in the word.");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(PAUSER);
 
                     // Exit if word is found
                     if (!outputChars.Contains('_'))
@@ -154,7 +154,7 @@ namespace Hangman
                     if (playAgainAnswer == ' ')
                     {
                         Console.Write($"\n\tPlease enter Y or N ... try again!!");
-                        Thread.Sleep(750);
+                        Thread.Sleep(PAUSER);
                         Console.SetCursorPosition(0, 19);
                         Console.Write($"{BLANKER}");
                     }
